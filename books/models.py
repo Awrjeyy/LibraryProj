@@ -31,6 +31,7 @@ class Book(models.Model):
     book_cover = models.ImageField(default='default-book-cover.jpg',
         upload_to='book-cover',
     )
+    book_description = models.TextField(default="Put book description")
     
     # ownerid = models.ForeignKey(User, on_delete=models.CASCADE)
 

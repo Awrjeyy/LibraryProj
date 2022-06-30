@@ -1,24 +1,22 @@
 $(document).ready(function () {
     var base_url = window.location.origin
-    $('#userform').submit(function (event){
+    $('#loginform').submit(function (event){
+        console.log('Pizza')
         event.preventDefault();
         $.ajax({
             type:'POST',
             beforeSend: function(xhr, settings){
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.setRequestHeader("X-CSRFToken", csrftokenlogin);
             },
-            url: base_url + '/users/api/create/',
+            url: base_url + '/users/api/login/',
             data: {
-                'email': $('#email').val(),
-                'first_name': $('#first_name').val(),
-                'last_name': $('#last_name').val(),
-                'password': $('#password1').val(),
-                'password2': $('#password2').val(),
+                'email': $('#loginemail').val(),
+                'password': $('#loginpassword').val(),
                 
             },
             success: function(response){
-                console.log("User has been Created");
-                console.log(data);
+                console.log("User has Logged In");
+                console.log();
             },
             error: function(){
                 console.log('Error: Something Wrong');

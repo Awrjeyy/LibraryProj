@@ -11,7 +11,7 @@ urlpatterns = [
     path('api/update/<int:id>/', api.UserViewset.as_view({'put': 'put_detail_user'}) ),
     path('api/detail/<int:id>/', api.UserViewset.as_view({'get': 'get_detail_user'}) ),
     path('api/delete/<int:id>/', api.UserViewset.as_view({'delete': 'delete_user'}) ),
-    path('api/login/', obtain_auth_token, name='api-login'),
+    path('api/login/', api.UserViewset.as_view({'post': 'userlogin'}) ),
     path('', views.UserView.as_view(), name="users-index"),
     path('create/', views.UserCreateView.as_view(), name="users-create"),
     path('detail/<int:id>/', views.UserDetailView.as_view(), name="users-detail"),

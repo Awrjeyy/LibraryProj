@@ -32,7 +32,7 @@ class UserViewset(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create_user(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         
         serializer = RegisterSerializer(data=request.data)
         
@@ -43,6 +43,7 @@ class UserViewset(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def userlogin(self, request, format=None):
+        import pdb; pdb.set_trace()
         data = request.data
 
         email = data.get('email', None)
