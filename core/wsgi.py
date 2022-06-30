@@ -1,5 +1,5 @@
 """
-WSGI config for libproj project.
+WSGI config for libraryproject project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class='container' style="justify-content: center; align-items: center;">
+    <div class="position-relative">
+        <form id="userform">
+            <div class="mb-3">
+                <label for="InputEmail" class="form-label">Email</label>
+                <input class="form-control" id="email" type="text" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="InputFirstName" class="form-label">First Name</label>
+                <input class="form-control" id="first_name" type="text" name="first_name">
+            </div>
+            <div class="mb-3">
+                <label for="InputLastName" class="form-label">Last Name</label>
+                <input class="form-control" id="last_name" type="text" name="last_name">
+            </div>
+            <div class="mb-3">
+                <label for="InputLastName" class="form-label">Password</label>
+                <input class="form-control" id="password1" type="password" name="password1">
+            </div>
+            <div class="mb-3">
+                <label for="InputLastName" class="form-label">Confirm Password</label>
+                <input class="form-control" id="password2" type="password" name="password2">
+            </div>
+            <input  type="submit" name="submit" value="Submit">
+        </form>
+        <div id="output">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_script %}
+<script type="text/javascript" src="{% static 'js/users/library-users-create.js' %}"></script>
+{% endblock %}

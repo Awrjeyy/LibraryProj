@@ -1,5 +1,5 @@
 """
-ASGI config for libproj project.
+ASGI config for libraryproject project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
