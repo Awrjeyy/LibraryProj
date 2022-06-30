@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from pyexpat import model
 from django.db import models
 from django.conf import settings
@@ -30,6 +31,7 @@ class Book(models.Model):
     book_cover = models.ImageField(default='default-book-cover.jpg',
         upload_to='book-cover',
     )
+    
     # ownerid = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):

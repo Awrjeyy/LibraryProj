@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import CustomUser
 from django.core.validators import RegexValidator
+from django.contrib.auth import authenticate
+from django.contrib.auth.password_validation import validate_password
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -12,8 +14,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     alpha = RegexValidator(r'^[a-zA-Z]*$', 'Only alphabet characters are allowed.')
     first_name = serializers.CharField(label="First name", required=True, max_length=100, validators=[alpha])
     last_name = serializers.CharField(label="Last name", required=True, max_length=100, validators=[alpha])
-    password = serializers.CharField(label="Password", required=True, write_only=True)
-    password2 = serializers.CharField(label="Confirm Password", required=True, write_only=True)
+    password = serializers.CharField(required=True, write_only=True, validators=[validate_password])
+    password2 = serializers.CharField(required=True, write_only=True)
 
     class Meta:
         model = CustomUser
@@ -39,3 +41,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+class LoginSerializers(serializers.ModelSerializer):
+    email = serializers.CharField()
+    password = serializers.CharField(required=True, write_only=True, validators=[validate_password])
+
+    class Meta:
+        field = (
+            'email',
+            'password',
+        )

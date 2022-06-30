@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var base_url = window.location.origin
-    $('#userform').submit(function (event){
+    $('#loginform').submit(function (event){
         event.preventDefault();
         $.ajax({
             type:'POST',
@@ -10,14 +10,12 @@ $(document).ready(function () {
             url: base_url + '/users/api/create/',
             data: {
                 'email': $('#email').val(),
-                'first_name': $('#first_name').val(),
-                'last_name': $('#last_name').val(),
                 'password': $('#password1').val(),
-                'password2': $('#password2').val(),
                 
             },
             success: function(response){
                 console.log("User has been Created");
+                console.log(data);
             },
             error: function(){
                 console.log('Error: Something Wrong');
@@ -42,3 +40,4 @@ function getCookie(name) {
     return cookieValue;
 }
 const csrftoken = getCookie('csrftoken');
+

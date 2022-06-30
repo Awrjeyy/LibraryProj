@@ -18,6 +18,7 @@ $(document).ready(function () {
             },
             success: function(response){
                 console.log("User has been Created");
+                console.log(data);
             },
             error: function(){
                 console.log('Error: Something Wrong');
@@ -41,4 +42,5 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-const csrftoken = getCookie('csrftoken');
+const csrftokenlogin = getCookie('csrftoken');
+

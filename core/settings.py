@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
-
+    
     'users.apps.UsersConfig',
     'books.apps.BooksConfig',
 ]
@@ -58,7 +58,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DETAIL_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
 AUTH_USER_MODEL = 'users.CustomUser'
+
 AUTHENTICATION_BACKENDS = [
     'users.backends.EmailBackend',
 ]
