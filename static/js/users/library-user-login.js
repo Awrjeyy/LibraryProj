@@ -15,8 +15,9 @@ $(document).ready(function () {
                 
             },
             success: function(response){
-                console.log("User has Logged In");
-                console.log();
+                console.log("User has Logged In and redirected");
+                a = window.location.replace(base_url + '/users/')
+                console.log(a);
             },
             error: function(){
                 console.log('Error: Something Wrong');
