@@ -20,7 +20,7 @@ class UserViewset(viewsets.ViewSet):
 
     def put_detail_user(self, request, id, format=None):
         user = CustomUser.objects.get(id=id)
-        serializer = UserSerializer(user, data=request.data)
+        serializer = UserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

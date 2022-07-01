@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class='container' style="justify-content: center; align-items: center;">
+    <div class="position-relative">
+        <form id="updateuserdetails" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="InputEmail" class="form-label">Profile Image</label>
+                <input class="form-control" id="updtusrimg" type="file" name="updtusrimg">
+            </div>
+            <div class="mb-3">
+                <label for="InputEmail" class="form-label">First Name</label>
+                <input class="form-control" id="updtfname" type="text" name="updtfname">
+            </div>
+            <div class="mb-3">
+                <label for="InputEmail" class="form-label">Last Name</label>
+                <input class="form-control" id="updtlname" type="text" name="updtlname">
+            </div>
+            <div class="mb-3">
+                <label for="InputEmail" class="form-label">Bio</label>
+                <input class="form-control" id="updtbio" type="text" name="updtbio">
+            </div>
+            <input  type="submit" name="submit" value="Submit">
+        </form>
+        <div id="output">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_script %}
+<script type="text/javascript" src="{% static 'js/users/library-users-update.js' %}"></script>
+{% endblock %}

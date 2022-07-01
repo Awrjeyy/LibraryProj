@@ -6,7 +6,7 @@ from PIL import Image
 
 # Create your models here.
 
-# User = settings.AUTH_USER_MODEL
+User = settings.AUTH_USER_MODEL
 class Book(models.Model):
     Physical = 'Physical'
     Digital = 'Digital'
@@ -20,7 +20,7 @@ class Book(models.Model):
     location_choices = (
         (Home, 'Home'),
         (Office, 'Office'),
-        (Matrix, 'into the matrix'),
+        (Matrix, 'Into the Matrix'),
     )
     title = models.CharField(max_length=255)
     authorName = models.CharField(max_length=255)
@@ -28,12 +28,12 @@ class Book(models.Model):
     added = models.DateTimeField(auto_now_add=True)
     book_condition = models.CharField(max_length=20, choices=book_type_choices, default=Physical)
     book_location = models.CharField(max_length=20, choices=location_choices, default=Matrix)
-    book_cover = models.ImageField(default='default-book-cover.jpg',
+    book_cover = models.ImageField(default='default-book-cover.png',
         upload_to='book-cover',
     )
     book_description = models.TextField(default="Put book description")
     
-    # ownerid = models.ForeignKey(User, on_delete=models.CASCADE)
+    ownerid = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
 
     def save(self, *args, **kwargs):
         super().save()
