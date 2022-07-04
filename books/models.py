@@ -8,32 +8,32 @@ from PIL import Image
 
 User = settings.AUTH_USER_MODEL
 class Book(models.Model):
-    Physical = 'Physical'
-    Digital = 'Digital'
+    physical = 'Physical'
+    digital = 'Digital'
     book_type_choices = (
-        (Physical, 'Phyiscal'),
-        (Digital, 'Digital'),
+        (physical, 'Phyiscal'),
+        (digital, 'Digital'),
     )
-    Home = 'Home'
-    Office = 'Office'
-    Matrix = 'Into the Matrix'
+    home = 'Home'
+    office = 'Office'
+    matrix = 'Into the Matrix'
     location_choices = (
-        (Home, 'Home'),
-        (Office, 'Office'),
-        (Matrix, 'Into the Matrix'),
+        (home, 'Home'),
+        (office, 'Office'),
+        (matrix, 'Into the Matrix'),
     )
     title = models.CharField(max_length=255)
     authorName = models.CharField(max_length=255)
     authorEmail = models.CharField(max_length=255)
     added = models.DateTimeField(auto_now_add=True)
-    book_condition = models.CharField(max_length=20, choices=book_type_choices, default=Physical)
-    book_location = models.CharField(max_length=20, choices=location_choices, default=Matrix)
-    book_cover = models.ImageField(default='default-book-cover.png',
+    book_condition = models.CharField(max_length=20, choices=book_type_choices, default=physical)
+    book_location = models.CharField(max_length=20, choices=location_choices, default=digital)
+    book_cover = models.ImageField(blank=True, null=True, default='default-book-cover.png',
         upload_to='book-cover',
     )
     book_description = models.TextField(default="Put book description")
     
-    ownerid = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
 
     def save(self, *args, **kwargs):
         super().save()

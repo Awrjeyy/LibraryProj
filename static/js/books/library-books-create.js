@@ -1,20 +1,25 @@
 $(document).ready(function () {
     var base_url = window.location.origin
-    $('#loginform').submit(function (event){
+    $('#bookform').submit(function (event){
         event.preventDefault();
+        console.log("A new book is about to be created.");
+        createBookData = new FormData();
+        createBookData.append('title', $('#title').val());
+        createBookData.append('authorName', $('#authorName').val());
+        createBookData.append('authorEmail', $('#authorEmail').val());
+        createBookData.append('book_condition', $('#bookcondition').val());
+        createBookData.append('book_location', $('#booklocation').val());
         $.ajax({
             type:'POST',
             beforeSend: function(xhr, settings){
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.setRequestHeader("X-CSRFToken", createbookcsrftoken);
             },
-            url: base_url + '/users/api/create/',
-            data: {
-                'email': $('#email').val(),
-                'password': $('#password1').val(),
-                
-            },
+            url: base_url + '/books/api/create/',
+            data: createBookData,
+            processData: false,
+            contentType: false,
             success: function(response){
-                console.log("User has been Created");
+                console.log("BookLog has been Created");
                 console.log(response);
             },
             error: function(){
@@ -39,5 +44,5 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-const csrftoken = getCookie('csrftoken');
+const createbookcsrftoken = getCookie('csrftoken');
 

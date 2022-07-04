@@ -13,8 +13,8 @@ urlpatterns = [
     path('api/delete/<int:id>/', api.UserViewset.as_view({'delete': 'delete_user'}) ),
     path('api/login/', api.UserViewset.as_view({'post': 'userlogin'}) ),
     path('', views.UserView.as_view(), name="users-index"),
-    path('create/', views.UserCreateView.as_view(), name="users-create"),
-    path('detail/<int:id>/', views.UserDetailView.as_view(), name="users-detail"),
+    path('register/', views.UserCreateView.as_view(), name="users-profile"),
+    path('profile/<int:id>/', views.UserDetailView.as_view(), name="users-detail"),
     path('update/<int:id>/', views.UserUpdateView.as_view(), name="users-update"),
     path('login/', views.UserLoginView.as_view(), name="users-login"),
 ]

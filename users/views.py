@@ -10,11 +10,11 @@ class UserView(TemplateView):
     template_name = 'users/index.html'
 
 class UserDetailView(TemplateView):
-    template_name = 'users/detail.html'
+    template_name = 'users/profile.html'
 
 
 class UserCreateView(TemplateView):
-    template_name = 'users/create.html'
+    template_name = 'users/register.html'
 
 
 class UserUpdateView(TemplateView):

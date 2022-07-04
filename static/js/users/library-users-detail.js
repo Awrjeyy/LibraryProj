@@ -17,7 +17,6 @@ function displayUserDetail(userid) {
                     "<p><label> Last Login : </label> <span id='condition-"+ userid.id + "'>" + logintime[0] + ' ' + logintime[1] + "</span></p>" +
                     "<p><label> Date Joined : </label> <span id='added-"+ userid.id + "'>" + joinedtime[0] + ' ' + joinedtime[1] + "</span></p>" +
                     "<p><a id='"+ userid.id + "' href='" + base_url + "/users/update/"+ userid.id + "' class='btn btn-primary'>Update</a></p>" +
-                    "<p><a id='"+ userid.id + "' href='" + base_url + "/users/delete/"+ userid.id + "' class='btn btn-danger'>Delete</a></p>" +
                     "</div>"
                     
     

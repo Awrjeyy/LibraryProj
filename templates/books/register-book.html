@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class='container' style="justify-content: center; align-items: center;">
+    <div class="position-relative">
+        <form id="bookform" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="InputBookCover" class="form-label">Profile Image</label>
+                <input class="form-control" id="bookcover" type="file" name="bookcover">
+            </div>
+            <div class="mb-3">
+                <label for="InputTitle" class="form-label">Title</label>
+                <input class="form-control" id="title" type="text" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="InputAuthor" class="form-label">Author</label>
+                <input class="form-control" id="authorName" type="text" name="authorName">
+            </div>
+            <div class="mb-3">
+                <label for="InputAuthorEmail" class="form-label">Author's Email</label>
+                <input class="form-control" id="authorEmail" type="text" name="authorEmail">
+            </div>
+            <div class="mb-3">
+                <label for="InputCondition" class="form-label">Book's Condition</label>
+                <select class="form-select" aria-label="Default select example" id="bookcondition" name="bookcondition">
+                    <option selected>Open this select menu</option>
+                    <option value="Physical">Physical</option>
+                    <option value="Digital">Digital</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="InputLocation" class="form-label">Book's Location</label>
+                <select class="form-select" aria-label="Default select example" id="booklocation" name="booklocation">
+                    <option selected>Open this select menu</option>
+                    <option value="Home">Home</option>
+                    <option value="Office">Office</option>
+                    <option value="Into the Matrix">Into the Matrix</option>
+                </select>
+            </div>
+            <input  type="submit" name="submit" value="Submit">
+        </form>
+        <div id="output">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_script %}
+<script type="text/javascript" src="{% static 'js/books/library-books-create.js' %}"></script>
+{% endblock %}

@@ -15,7 +15,7 @@ function displayBookDetail(bookid) {
                     "<p><label> Author :</label> <span id='authorName-"+ bookid.id + "'>" + bookid.authorName + "</span></p>" +
                     "<p><label> Email :</label> <span id='authorEmail-"+ bookid.id + "'>" + bookid.authorEmail + "</span></p>" +
                     "<p><label> Condition : </label> <span id='condition-"+ bookid.id + "'>" + bookid.book_condition + "</span></p>" +
-                    "<p><label> Location :</label> <span id='location-"+ bookid.id + "'>" + bookid.location + "</span></p>" +
+                    "<p><label> Location :</label> <span id='location-"+ bookid.id + "'>" + bookid.book_location + "</span></p>" +
                     "<p><label> Book Description : </label> <span id='book_description-"+ bookid.id + "'>" + bookid.book_description + "</span></p>" +
                     "<p><label> Date Added : </label> <span id='added-"+ bookid.id + "'>" + ymd + " " + time + "</span></p>" +
                     "</div>"
