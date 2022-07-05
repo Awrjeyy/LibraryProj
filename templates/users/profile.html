@@ -3,11 +3,24 @@
 {% load static %}
 {% block content %}
 <div class='container'>
-   <div class="row align-items-start">
-      <div id="users-detail" style="justify-content: center; align-items: center;">
-         
+      <div id="users-detail" class="d-flex justify-content-center align-middle">
+            <div class="card" style="width: 18rem;">
+                  <div id="userpic" class="rounded-circle account-img">
+                  </div>
+                  <div class="card-body">
+                        <div class="row">
+                              <div class="col mx-auto">
+                                    <h5 id="userfirstlastname" class="card-title"></h5>
+                              </div>
+                              <div id="userupdate"class="col">
+                              </div>
+                        </div>
+                  
+                  <h6 id="userEmail" class="card-title"></h5>
+                  <p id="userBio" class="card-text"></p>
+                  </div>
+            </div>
       </div>
-   </div>
 </div>
 {% endblock %}
 {% block extra_script %}

@@ -18,8 +18,8 @@ class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-    bio = models.TextField(default=NULL)
-    user_img = models.ImageField(default='default.jpg',
+    bio = models.TextField(default="Put your bio")
+    user_img = models.ImageField(blank=True, null=True, default='default.jpg',
         upload_to='profile-pics',
     )
     objects = CustomUserManager()

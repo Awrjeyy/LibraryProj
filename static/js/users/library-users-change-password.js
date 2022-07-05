@@ -2,30 +2,24 @@ $(document).ready(function () {
     var base_url = window.location.origin
     var urlid = window.location.pathname
     var userid = urlid.toString().split('/')[3]
-    $('#updateuserdetails').submit(function (event){
+    $('#passwordchange').submit(function (event){
         event.preventDefault();
-        console.log('updating user');
-        updateData = new FormData();
-        if(updateData.append('user_img', $('#updtusrimg')[0].files[0] != null)){
-            updateData.append('user_img', $('#updtusrimg')[0].files[0]);
-        }
-        else {
-            updateData.append('user_img', '');
-        }
-        updateData.append('first_name', $('#updtfname').val());
-        updateData.append('last_name', $('#updtlname').val());
-        updateData.append('bio', $('#updtbio').val());
+        console.log('updating password');
+        updatePWData = new FormData();
+        updatePWData.append('old_password', $('#old_password').val());
+        updatePWData.append('password1', $('#password1').val());
+        updatePWData.append('password2', $('#password2').val());
         $.ajax({
             type:'POST',
             beforeSend: function(xhr, settings){
-                xhr.setRequestHeader("X-CSRFToken", userupdatecsrftoken);
+                xhr.setRequestHeader("X-CSRFToken", userupdatepwcsrftoken);
             },
-            url: base_url + '/users/api/update/' + userid + "/",
-            data: updateData,
+            url: base_url + '/users/api/change-password/' + userid + "/",
+            data: updatePWData,
             processData: false,
             contentType: false,
             success: function(response){
-                console.log("User has been Updated");
+                console.log("User has changed password");
                 console.log(response);
             },
             error: function(){
@@ -51,4 +45,4 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-const userupdatecsrftoken = getCookie('csrftoken');
+const userupdatepwcsrftoken = getCookie('csrftoken');

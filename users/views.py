@@ -26,3 +26,6 @@ class UserDeleteView(TemplateView):
 
 class UserLoginView(TemplateView):
     template_name = 'users/login.html'
+
+class UserChangePWView(TemplateView):
+    template_name = 'users/change-password.html'

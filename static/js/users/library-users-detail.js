@@ -9,18 +9,29 @@ function displayUserDetail(userid) {
     console.log(userid.date_joined)
     console.log(logintimedata)
     console.log(logintime[0])
-        template = "<div class='row'>" +
-                    "<p><div class='media'><img src=" + userid.user_img + " class='card-img-top'></div></p>" +
-                    "<p><label> Name :</label> <span id='title-"+ userid.id + "'>" + userid.first_name + " " + userid.last_name + "</span></p>" +
-                    "<p><label> Email :</label> <span id='authorName-"+ userid.id + "'>" + userid.email + "</span></p>" +
-                    "<p><label> Bio :</label> <span id='authorEmail-"+ userid.id + "'>" + userid.bio + "</span></p>" +
-                    "<p><label> Last Login : </label> <span id='condition-"+ userid.id + "'>" + logintime[0] + ' ' + logintime[1] + "</span></p>" +
-                    "<p><label> Date Joined : </label> <span id='added-"+ userid.id + "'>" + joinedtime[0] + ' ' + joinedtime[1] + "</span></p>" +
-                    "<p><a id='"+ userid.id + "' href='" + base_url + "/users/update/"+ userid.id + "' class='btn btn-primary'>Update</a></p>" +
-                    "</div>"
-                    
-    
-    $('#users-detail').append(template)
+    console.log(id)
+    console.log(userid.id)
+
+
+    let fullname = "<label> Name: </label> " + userid.first_name + userid.last_name
+    let userpic = "<img src=" + userid.user_img + " class='rounded-circle account-img'>"
+    let useremail = "<label> Email: </label> " + userid.email
+    let userbio = "<label> Bio: </label> " + userid.bio
+    let userupdate = ""
+    if(userid.id == id){
+        userupdate = "<a id='"+ userid.id + "' href='" + base_url + "/users/update/"+ userid.id + "' class='btn btn-primary btn-sm'>Update</a>"
+    }
+    else{
+        userupdate = ""
+    }
+
+
+    $('#userpic').append(userpic)
+    $('#userfirstlastname').append(fullname)
+    $('#userEmail').append(useremail)
+    $('#userBio').append(userbio)
+    $('#userupdate').append(userupdate)
+   
     console.log(userid.user_img)
 }
 

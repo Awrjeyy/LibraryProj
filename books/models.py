@@ -35,6 +35,8 @@ class Book(models.Model):
     
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
 
+    isAvailable = models.BooleanField(default=True)
+
     def save(self, *args, **kwargs):
         super().save()
 

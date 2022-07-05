@@ -34,10 +34,11 @@ class BookViewSet(viewsets.ViewSet):
 
     def put_books_detail(self, request, id, format=None):
         books = Book.objects.get(id=id)
-        serializer = BookSerializer(books, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+        if books.owner_id == request.user.id:
+            serializer = BookSerializer(books, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def delete_book_detail(self, request, id, format=None):

@@ -1,4 +1,5 @@
 var base_url = window.location.origin
+
 $(document).ready(function(){
     console.log('Ready.')
     

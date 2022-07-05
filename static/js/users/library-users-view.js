@@ -23,10 +23,13 @@ function displayUserList(data) {
     let template = "";
     $.each(data, function(index, value){
         console.log(value)
-        template += "<div class='row'>" +
-                    "<p><label> Name :</label> <span id='title-"+ value.id + "'>" + value.first_name + ' ' + value.last_name + "</span></p>" +
-                    "<p><label> Bio :</label> <span id='authorName-"+ value.id + "'>" + value.bio + "</span></p>" +
-                    "<p><a id='"+ value.id + "' href='" + base_url + "/users/detail/"+ value.id + "' class='btn btn-primary'>Check it out</a></p>" +
+        template += "<div class='card mx-auto ' style='width: 18rem;'>" + 
+                        "<img src=" + value.user_img + " class='rounded-circle account-img'>" +
+                        "<div class='card-body '>" +
+                        "<h5 class='card-title'><label> Name : </label> "+ value.first_name + ' ' + value.last_name + "</h5>" +
+                        "<p class='card-text'><label> Bio : </label>" + value.bio + "</p>" +
+                        "<a id='"+ value.id + "' href='" + base_url + "/users/profile/"+ value.id + "' class='btn btn-primary'>Check it out &rarr;</a>" +
+                        "</div>" +
                     "</div>"
                     
     });
