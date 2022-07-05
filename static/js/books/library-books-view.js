@@ -23,11 +23,15 @@ function displayBookList(data) {
     let template = "";
     $.each(data, function(index, value){
         console.log(value)
-        template += "<div class='row'>" +
-                    "<p><label> Title :</label> <span id='title-"+ value.id + "'>" + value.title + "</span></p>" +
-                    "<p><label> Author :</label> <span id='authorName-"+ value.id + "'>" + value.authorName + "</span></p>" +
-                    "<p><a id='"+ value.id + "' href='" + base_url + "/books/detail/"+ value.id + "' class='btn btn-primary'>Check it out</a></p>" +
-                    "</div>"
+        template += "<div class='card mx-auto ' style='width: 18rem;'>" + 
+                        "<img src=" + value.book_cover + " >" +
+                        "<div class='card-body '>" +
+                        "<h5 class='card-title'>Title : " + value.title +"</h5>" +
+                        "<p class='card-text'><label> Author : </label>" + value.authorName + "</p>" +
+                        "<a id='"+ value.id + "' href='" + base_url + "/books/detail/"+ value.id + "' class='btn btn-primary'>Check it out</a>" +
+                        "</div>" +
+                    "</div><br>"
+
                     
     });
     $('#book-views').append(template)

@@ -4,7 +4,7 @@
 {% block content %}
 <div class='container' style="justify-content: center; align-items: center;">
     <div class="position-relative">
-        <form id="updateuserdetails" enctype="multipart/form-data" novalidate>
+        <form id="updatebooksdetails" enctype="multipart/form-data" novalidate>
             <div class="mb-3">
                 <label for="InputBkCover" class="form-label">Book Cover</label>
                 <input class="form-control" id="updtbkcover" type="file" name="updtbkcover">
@@ -21,6 +21,10 @@
                 <label for="InputAuthorEmail" class="form-label">Author Email</label>
                 <input class="form-control" id="updtaemail" type="text" name="updtaemail">
             </div>
+            <div class="mb-3">
+                <label for="InputBookDescription" class="form-label">Book's Description</label>
+                <textarea class="form-control" id="updtbkdesc" rows="3"></textarea>
+              </div>
             <div class="mb-3">
                 <label for="InputCondition" class="form-label">Book's Condition</label>
                 <select class="form-select" aria-label="Default select example" id="updtbkcondition" name="updtbkcondition">
@@ -46,5 +50,5 @@
 </div>
 {% endblock %}
 {% block extra_script %}
-<script type="text/javascript" src="{% static 'js/books/library-users-update.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/books/library-books-update.js' %}"></script>
 {% endblock %}

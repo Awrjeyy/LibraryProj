@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 from pyexpat import model
+from venv import create
 from django.db import models
 from django.conf import settings
 from PIL import Image
@@ -35,7 +36,9 @@ class Book(models.Model):
     
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
 
-    isAvailable = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['-added']
 
     def save(self, *args, **kwargs):
         super().save()
@@ -46,3 +49,14 @@ class Book(models.Model):
             new_img = (300, 300)
             bk_cover.thumbnail(new_img)
             bk_cover.save(self.book_cover.path)
+
+class isAvailable(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    available = models.BooleanField(default=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
+    def __str__(self):
+        return 'Borrowed by {}'.format(self.user)

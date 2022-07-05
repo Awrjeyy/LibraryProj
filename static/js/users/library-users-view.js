@@ -30,7 +30,7 @@ function displayUserList(data) {
                         "<p class='card-text'><label> Bio : </label>" + value.bio + "</p>" +
                         "<a id='"+ value.id + "' href='" + base_url + "/users/profile/"+ value.id + "' class='btn btn-primary'>Check it out &rarr;</a>" +
                         "</div>" +
-                    "</div>"
+                    "</div><br>"
                     
     });
     $('#users-views').append(template)

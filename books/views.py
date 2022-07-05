@@ -10,6 +10,9 @@ class BooksView(TemplateView):
 
 class BooksDetailView(TemplateView):
     template_name = 'books/detail.html'
-
+    
+class BooksUpdateView(TemplateView):
+    template_name = 'books/update-book.html'
+    
 class BooksCreateView(TemplateView):
     template_name = "books/register-book.html"

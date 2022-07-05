@@ -24,6 +24,9 @@ class CustomUser(AbstractUser):
     )
     objects = CustomUserManager()
 
+    class Meta:
+        ordering = ['-date_joined']
+
     def __str__(self):
         return self.email
 

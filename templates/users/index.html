@@ -2,15 +2,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class='container'>
+<div class="container">
+   
+     <div class="col" id="users-views">
+      
+     </div>
+     
+   </div>
+ </div>
+{% comment %} <div class='container'>
    <div class="row align-items-start">
-      <div class="col">
-      <div id="users-views" class="d-flex justify-content-center">
+      <div id="users-views" class="col d-flex justify-content-center">
          
       </div>
-      </div>
    </div>
-</div>
+</div> {% endcomment %}
 {% endblock %}
 {% block extra_script %}
 <script type="text/javascript" src="{% static 'js/users/library-users-view.js' %}"></script>
