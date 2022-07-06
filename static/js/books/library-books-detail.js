@@ -20,6 +20,7 @@ function displayBookDetail(bookid) {
     let bookadded = "<label> Date Added : </label> <span id='added-"+ bookid.id + "'>" + ymd + " " + time + "</span>"
     let bookcon = "<label> Condition : </label> <span id='condition-"+ bookid.id + "'>" + bookid.book_condition + "</span>"
     let bookupdate = "<p><a id='"+ bookid.id + "' href='" + base_url + "/books/update/"+ bookid.id + "' class='btn btn-primary btn-sm'>Update</a></p>"
+    let bookstatus = bookid.book_available
 
     $('#bookcover').append(bookcover)
     $('#booktitle').append(booktitle)
@@ -28,28 +29,11 @@ function displayBookDetail(bookid) {
     $('#bookdesc').append(bookdesc)
     $('#bookadded').append(bookadded)
     $('#bookcon').append(bookcon)
-    if(bookid.owner == id){
-        $('#bookupdate').append(bookupdate)
-    }
+    $('#bookstatus').append(bookstatus)
+
+    
 }
 
-// template = "<div class='row'>" +
-//                         "<p><div class='media'><img src=" + bookid.book_cover + " class='card-img-top'></div></p>" +
-//                         "<p><label> Title :</label> <span id='title-"+ bookid.id + "'>" + bookid.title + "</span></p>" +
-//                         "<p><label> Author :</label> <span id='authorName-"+ bookid.id + "'>" + bookid.authorName + "</span></p>" +
-//                         "<p><label> Email :</label> <span id='authorEmail-"+ bookid.id + "'>" + bookid.authorEmail + "</span></p>" +
-//                         "<p><label> Condition : </label> <span id='condition-"+ bookid.id + "'>" + bookid.book_condition + "</span></p>" +
-//                         "<p><label> Location :</label> <span id='location-"+ bookid.id + "'>" + bookid.book_location + "</span></p>" +
-//                         "<p><label> Book Description : </label> <span id='book_description-"+ bookid.id + "'>" + bookid.book_description + "</span></p>" +
-//                         "<p><label> Date Added : </label> <span id='added-"+ bookid.id + "'>" + ymd + " " + time + "</span></p>"
-                        
-//         if(bookid.owner ==  id) {
-//             template = template + "<p><a id='"+ bookid.id + "' href='" + base_url + "/books/update/"+ bookid.id + "' class='btn btn-primary'>Update</a></p>" + "</div>"
-//         }
-//         else {
-//             template = template + "</div>"
-//         }
-        
 
 $(document).ready(function(){
     
@@ -74,6 +58,7 @@ $(document).ready(function(){
             console.log('Error: Something Wrong');
         }
     });
+    
 
 });
 

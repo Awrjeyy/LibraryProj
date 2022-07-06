@@ -1,6 +1,7 @@
 from asyncio.windows_events import NULL
 from pyexpat import model
 from venv import create
+from zoneinfo import available_timezones
 from django.db import models
 from django.conf import settings
 from PIL import Image
@@ -27,6 +28,7 @@ class Book(models.Model):
     authorName = models.CharField(max_length=255)
     authorEmail = models.CharField(max_length=255)
     added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     book_condition = models.CharField(max_length=20, choices=book_type_choices, default=physical)
     book_location = models.CharField(max_length=20, choices=location_choices, default=digital)
     book_cover = models.ImageField(blank=True, null=True, default='default-book-cover.png',
@@ -34,7 +36,11 @@ class Book(models.Model):
     )
     book_description = models.TextField(default="Put book description")
     
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="books_owner")
+
+    likes = models.ManyToManyField(User, related_name="books_likes")
+    
+    
 
 
     class Meta:
@@ -50,13 +56,33 @@ class Book(models.Model):
             bk_cover.thumbnail(new_img)
             bk_cover.save(self.book_cover.path)
 
-class isAvailable(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    available = models.BooleanField(default=True)
-    created_on = models.DateTimeField(auto_now_add=True)
+class BorrowBook(models.Model):
+
+    borrow = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="books_borrower")
+
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, related_name="rented_book")
+
+    book_available = models.BooleanField(default=True)
+
+    borrowed_on = models.DateTimeField(auto_now_add=True)
+
+    book_return = models.BooleanField(default=False)
+
+    returned_on = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['-borrowed_on']
+    
     def __str__(self):
-        return 'Borrowed by {}'.format(self.user)
+        return 'Borrowed by {}'.format(self.borrow)
+class Comment(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta: 
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return 'Comment by {}'.format(self.user)

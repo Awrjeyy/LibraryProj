@@ -24,7 +24,7 @@ function displayUserDetail(userid) {
     else{
         userupdate = ""
     }
-
+    
 
     $('#userpic').append(userpic)
     $('#userfirstlastname').append(fullname)

@@ -1,3 +1,4 @@
+from functools import partial
 from os import stat, stat_result
 from urllib import request
 from django.shortcuts import render
@@ -96,7 +97,7 @@ class UpdateUserViewset(viewsets.ViewSet):
     def updateuser(self, request, *args, **kwargs):
         import pdb; pdb.set_trace()
         user = self.request.user
-        serializer = UpdateUserSerializer(user, data = self.request.data, request=self.request)
+        serializer = UpdateUserSerializer(user, data = self.request.data, request=self.request, partial=True)
 
         if serializer.is_valid():
             user = serializer.save()

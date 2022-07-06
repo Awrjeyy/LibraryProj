@@ -12,15 +12,22 @@
                <div class="row">
                      <div class="col mx-auto">
                         <div class="row">
-                           <div class="col-8">
+                           <h9 id="bookstatus" class="text-muted"></h9>
+                        </div>
+                        <div class="row">
+                           <div class="col-6 ">
                               <h5 id="booktitle" class="card-title"></h5>
                            </div>
-                           <div class="col-2">
+                           <div class="col-4">
                               <div class="row">
-                                 <div id="bookupdate" class="col">
+                                 <div id="bookupdate" class="col-6 col-sm-6">
                                  </div>
-                                 <div id="checkin" class="col">
-                                 </div>
+                                 {% if user.is_authenticated %}
+                                    <div id="checkin" class="col">
+                                    </div>
+                                    <div id="checkout" class="col">
+                                    </div>
+                                 {% endif %}
                               </div>
                            </div>
                         </div>
@@ -48,4 +55,5 @@
 {% endblock %}
 {% block extra_script %}
 <script type="text/javascript" src="{% static 'js/books/library-books-detail.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/books/library-books-checkin-out.js' %}"></script>
 {% endblock %}
