@@ -43,7 +43,7 @@ function CheckIfAvail(bookid){
     else{
         availabletext = "Borrowed"
     }
-    let bookstatus = "<label> Book's Status : </label>" + availabletext
+    let bookstatus = "<label> Status : </label>" + availabletext
     $('#bookstatus').append(bookstatus)
 
 

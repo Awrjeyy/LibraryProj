@@ -75,10 +75,12 @@ class BorrowBook(models.Model):
     
     def __str__(self):
         return 'Borrowed by {}'.format(self.borrow)
-class Comment(models.Model):
+class BookComments(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
+    user_firstname = models.CharField(max_length=255, default="")
+    user_lastname = models.CharField(max_length=255, default="")
+    bookcontent = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta: 
