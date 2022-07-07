@@ -16,3 +16,6 @@ class BooksUpdateView(TemplateView):
     
 class BooksCreateView(TemplateView):
     template_name = "books/register-book.html"
+
+class BooksResultView(TemplateView):
+    template_name = "books/results.html"

@@ -6,15 +6,21 @@ var userid = id
 
 function CheckIfAvail(bookid){
     let button = "<p><a id='borrow' href='" +  "' class='btn btn-primary btn-sm' >Borrow</a></p>"
+    let downloadbtn = "<p><a id='download' href='" +  "' class='btn btn-primary btn-sm' >Download</a></p>"
     let disablebutton = "<p><a id='borrow' href='" +  "' class='btn btn-primary btn-sm disabled' >Borrow</a></p>"
     let returnbook = "<p><a id='returnbook' href='" +  "' class='btn btn-danger btn-sm' >Return</a></p>"
     let availabletext = ""
-    
+    let bookcon = $("#bookcondition").text()
+    console.log(bookid.book)
+    console.log(bookcon=="Digital")
     console.log(bookid.book_available)
     console.log(bookid.book_return)
     console.log(bookid.book == null)
     console.log(bookid.borrow == userid)
-    if(bookid.book == null){
+    if(bookcon == "Digital"){
+        $('#checkin').append(downloadbtn)
+    }
+    else if(bookid.book == null){
         $('#checkin').append(button)
     }
     else if(bookid.borrow == userid){
@@ -22,13 +28,14 @@ function CheckIfAvail(bookid){
             $('#checkin').append(button)
         }
         else{
-            $('#checkout').append(returnbook)
+            $('#checkin').append(returnbook)
         }
         
     }
     else if(bookid.book_available == 1){
         $('#checkin').append(button)
     }
+    
     else{
         $('#checkin').append(disablebutton)
     }

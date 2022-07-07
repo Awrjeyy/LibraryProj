@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views, api
+from users.api import SearchViewset
 
 app_name = 'books'
 urlpatterns = [
@@ -18,5 +19,6 @@ urlpatterns = [
     path('', views.BooksView.as_view(), name='books-index'),
     path('detail/<int:id>/', views.BooksDetailView.as_view(), name='books-detail'),
     path('update/<int:id>/', views.BooksUpdateView.as_view(), name='books-update'),
+    path('create/', views.BooksCreateView.as_view(), name="books-create"),
     path('create/', views.BooksCreateView.as_view(), name="books-create"),
 ]

@@ -22,7 +22,7 @@ $(document).ready(function(){
 function displayBookList(data) {
     let template = "";
     $.each(data, function(index, value){
-        console.log(value)
+        
         template += "<div class='card mx-auto ' style='width: 18rem;'>" + 
                         "<img src=" + value.book_cover + " >" +
                         "<div class='card-body '>" +

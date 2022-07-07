@@ -7,6 +7,10 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        return super(BookSerializer, self).__init__(*args, **kwargs)
+
+
 class BorrowedBookSerializer(serializers.ModelSerializer):
     class Meta:
         model = BorrowBook

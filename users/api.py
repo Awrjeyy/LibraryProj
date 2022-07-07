@@ -1,7 +1,9 @@
 from functools import partial
 from os import stat, stat_result
 from urllib import request
+from django import views
 from django.shortcuts import render
+from django.db.models.query_utils import Q
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
@@ -10,8 +12,37 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status, viewsets
 from users import serializers
 from .models import CustomUser
-from .serializers import UserSerializer, RegisterSerializer, ChangePWSerializer, UpdateUserSerializer
+from books.models import Book
+from .serializers import UserSerializer, RegisterSerializer, ChangePWSerializer, UpdateUserSerializer, UserNBookSerializer
+from books.serializers import BookSerializer
 
+class SearchViewset(viewsets.ViewSet):
+    def searchuser(self, request, *args, **kwargs):
+        
+        query = request.GET.get('q')
+        searchfilter = request.GET.get('searchfilter')
+        
+        if searchfilter == 'book':
+            
+            books_result = Book.objects.filter(
+                Q(title__icontains=query) | Q(book_description__icontains=query)
+            )
+            serializer = BookSerializer(books_result, many=True)
+            # import pdb; pdb.set_trace()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+            
+        
+        elif searchfilter == 'users':
+            user_results = CustomUser.objects.filter(
+                Q(first_name__icontains=query) | Q(last_name__icontains=query)
+            )
+            serializer = UserSerializer(user_results, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+        
 
 class UserViewset(viewsets.ViewSet):
     parser_classes = (MultiPartParser, FormParser)

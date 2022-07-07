@@ -29,3 +29,6 @@ class UserLoginView(TemplateView):
 
 class UserChangePWView(TemplateView):
     template_name = 'users/change-password.html'
+
+class UserSearchView(TemplateView):
+    template_name = 'users/results.html'

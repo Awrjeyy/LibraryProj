@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+   <form id="search-form" class="d-flex" role="search" novalidate>
+      <input id="searchingbar" name="q"class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="{{ request.GET.q }}">
+      <select class="mx-auto" id="searchfilter"  name="searchfilter" value="{{ request.GET.searchvalue }}">
+        <option value="book">Book</option>
+        <option value="users">Users</option>
+    </select>
+      <button id="submitsearch" type="button" class="btn btn-primary">Search</button>
+    </form>
+</div>
+<div class='container'>
+   
+      <div class="col" id="views-results" >
+         
+      </div>
+      
+</div>
+{% endblock %}
+{% block extra_script %}
+<script type="text/javascript" src="{% static 'js/extra/library-extra-load-search.js' %}"></script>
+{% endblock %}

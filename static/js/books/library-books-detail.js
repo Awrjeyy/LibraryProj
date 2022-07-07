@@ -42,7 +42,7 @@ function displayBookDetail(bookid) {
     let bookemail =  "<label> Email :</label> <span id='authorEmail-"+ bookid.id + "'>" + bookid.authorEmail + "</span>"
     let bookdesc = "<label> Book Description : </label> <span id='book_description-"+ bookid.id + "'>" + bookid.book_description + "</span>"
     let bookadded = "<label> Date Added : </label> <span id='added-"+ bookid.id + "'>" + ymd + " " + time + "</span>"
-    let bookcon = "<label> Condition : </label> <span id='condition-"+ bookid.id + "'>" + bookid.book_condition + "</span>"
+    let bookcon = "<label> Condition : </label> <span id='bookcondition'>" + bookid.book_condition + "</span>"
     let bookloc = "<label> Location : </label> <span id='location-"+ bookid.id + "'>" + bookid.book_location + "</span>"
     let bookupdate = "<p><a id='"+ bookid.id + "' href='" + base_url + "/books/update/"+ bookid.id + "' class='btn btn-primary btn-sm'>Update</a></p>"
     let likecount = bookid.likes.length

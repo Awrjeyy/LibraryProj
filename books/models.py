@@ -70,6 +70,8 @@ class BorrowBook(models.Model):
 
     returned_on = models.DateTimeField(auto_now=True)
 
+    
+
     class Meta:
         ordering = ['-borrowed_on']
     

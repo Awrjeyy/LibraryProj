@@ -1,17 +1,24 @@
 from pyexpat import model
 from pkg_resources import require
 from rest_framework import serializers
+
+from books.models import Book
 from .models import CustomUser
 from django.utils.translation import gettext as _
 from django.core.validators import RegexValidator
 from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
+from books.serializers import BookSerializer
+
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        return super(UserSerializer, self).__init__(*args, **kwargs)
 
 class RegisterSerializer(serializers.ModelSerializer):
     alpha = RegexValidator(r'^[a-zA-Z]*$', 'Only alphabet characters are allowed.')
@@ -131,3 +138,10 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         user.save()
 
         return instance
+
+class UserNBookSerializer(serializers.Serializer):
+    users = UserSerializer()
+    books = BookSerializer() 
+
+    class Meta:
+        fields = '__all__'
