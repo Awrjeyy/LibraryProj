@@ -13,7 +13,7 @@ from rest_framework import status, viewsets
 from users import serializers
 from .models import CustomUser
 from books.models import Book
-from .serializers import UserSerializer, RegisterSerializer, ChangePWSerializer, UpdateUserSerializer, UserNBookSerializer
+from .serializers import UserSerializer, RegisterSerializer, ChangePWSerializer, UpdateUserSerializer, ResetPasswordSerializer
 from books.serializers import BookSerializer
 
 class SearchViewset(viewsets.ViewSet):
@@ -96,6 +96,15 @@ class UserViewset(viewsets.ViewSet):
         else:
 
             return Response({{'error': "Incorrect email or password."}})
+
+    def userlogout(self, request, *args, **kwargs):
+        # import pdb; pdb.set_trace()
+        request.user.auth_token.delete
+        logout(request)
+        return Response('Logged Out Successfully')
+
+   
+
 
 class ChangePassViewset(viewsets.ViewSet):
 

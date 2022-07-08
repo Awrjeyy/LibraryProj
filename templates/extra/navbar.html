@@ -36,7 +36,7 @@
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/books/create/">Create Book</a>
               <a class="dropdown-item" href="{% url 'users:users-detail' user.id %}">Update Profile</a>
-              <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+              <a id="logoutbutton" class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
           </div>
          
           {% else %}
@@ -55,5 +55,5 @@
 {% endblock %}
 {% block extra_script %}
 <script type="text/javascript" src="{% static 'js/extra/library-extra-search.js' %}"></script>
-
+<script type="text/javascript" src="{% static 'js/users/library-user-logout.js' %}"></script>
 {% endblock %}

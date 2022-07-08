@@ -60,6 +60,7 @@ function searchfilterfunc(){
         counter++;
          
     });
+    
 };
 function displaySearchResultList(searchlist) {
     let bookresult = "";

@@ -139,9 +139,22 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
         return instance
 
-class UserNBookSerializer(serializers.Serializer):
-    users = UserSerializer()
-    books = BookSerializer() 
-
+class ResetPasswordSerializer(serializers.ModelSerializer):
+    email=serializers.CharField(max_length=100)
+    password=serializers.CharField(max_length=100)
     class Meta:
-        fields = '__all__'
+        model = CustomUser
+        fields='__all__'
+    def save(self):
+        email=self.validated_data['email']
+        password=self.validated_data['password']
+        #filtering out whethere username is existing or not, if your username is existing then if condition will allow your username
+        if CustomUser.objects.filter(email=email).exists():
+            #if your username is existing get the query of your specific username 
+            user = CustomUser.objects.get(email=email)
+            #then set the new password for your username
+            user.set_password(password)
+            user.save()
+            return user
+        else:
+            raise serializers.ValidationError({'error':'please enter valid crendentials'})

@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/delete/<int:id>/', api.UserViewset.as_view({'delete': 'delete_user'}) ),
     path('api/change-password/<int:id>/', api.ChangePassViewset.as_view({'post': 'changepassword'}) ),
     path('api/login/', api.UserViewset.as_view({'post': 'userlogin'}) ),
+    path('api/logout/', api.UserViewset.as_view({'get': 'userlogout'})),
     path('api/search/', api.SearchViewset.as_view({'get': 'searchuser'}) ),
     path('', views.UserView.as_view(), name="users-index"),
     path('register/', views.UserCreateView.as_view(), name="users-profile"),

@@ -24,6 +24,7 @@ $(document).ready(function () {
             }
         });
     });
+    
 
 });
 function getCookie(name) {
@@ -42,4 +43,5 @@ function getCookie(name) {
     return cookieValue;
 }
 const csrftokenlogin = getCookie('csrftoken');
+
 
