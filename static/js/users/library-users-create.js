@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var base_url = window.location.origin
-    $('#loginform').submit(function (event){
+    $('#registersubmit').click(function (event){
         event.preventDefault();
         $.ajax({
             type:'POST',

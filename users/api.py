@@ -13,7 +13,7 @@ from rest_framework import status, viewsets
 from users import serializers
 from .models import CustomUser
 from books.models import Book
-from .serializers import UserSerializer, RegisterSerializer, ChangePWSerializer, UpdateUserSerializer, ResetPasswordSerializer
+from .serializers import UserSerializer, RegisterSerializer, ChangePWSerializer, UpdateUserSerializer
 from books.serializers import BookSerializer
 
 class SearchViewset(viewsets.ViewSet):
@@ -28,7 +28,7 @@ class SearchViewset(viewsets.ViewSet):
                 Q(title__icontains=query) | Q(book_description__icontains=query)
             )
             serializer = BookSerializer(books_result, many=True)
-            # import pdb; pdb.set_trace()
+             
             return Response(serializer.data, status=status.HTTP_200_OK)
             
         
@@ -55,7 +55,7 @@ class UserViewset(viewsets.ViewSet):
     def put_detail_user(self, request, id, format=None):
         permission_classes = [IsAuthenticated,]
         user = CustomUser.objects.get(id=id)
-        # import pdb; pdb.set_trace()
+         
         if user.id == request.user.id:
             serializer = UserSerializer(user, data=request.data, partial=True)
             if serializer.is_valid():
@@ -69,8 +69,9 @@ class UserViewset(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create_user(self, request, *args, **kwargs):
-        # import pdb; pdb.set_trace()
-        
+         
+        import pdb; pdb.set_trace()
+
         serializer = RegisterSerializer(data=request.data)
         
         if serializer.is_valid():
@@ -80,7 +81,7 @@ class UserViewset(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def userlogin(self, request, format=None):
-        # import pdb; pdb.set_trace()
+         
         data = request.data
 
         email = data.get('email', None)
@@ -98,7 +99,7 @@ class UserViewset(viewsets.ViewSet):
             return Response({{'error': "Incorrect email or password."}})
 
     def userlogout(self, request, *args, **kwargs):
-        # import pdb; pdb.set_trace()
+         
         request.user.auth_token.delete
         logout(request)
         return Response('Logged Out Successfully')
@@ -117,12 +118,11 @@ class ChangePassViewset(viewsets.ViewSet):
         return obj
 
     def changepassword(self, request, *args, **kwargs):
-
         serializer = ChangePWSerializer(data = self.request.data, request = self.request)
 
         if serializer.is_valid():
-            user = serializer.save()
-            return Response(status=status.HTTP_200_OK)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UpdateUserViewset(viewsets.ViewSet):
@@ -135,7 +135,7 @@ class UpdateUserViewset(viewsets.ViewSet):
         return obj
 
     def updateuser(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
+         
         user = self.request.user
         serializer = UpdateUserSerializer(user, data = self.request.data, request=self.request, partial=True)
 
@@ -145,24 +145,3 @@ class UpdateUserViewset(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-    # def get_user(self, queryset=None):
-    #     user = CustomUser.objects.get(id=request.user.id)
-    #     serializer = ChangePWSerializer(user)
-    #     return Response(serializer.data, status=status.HTTP_200_OK)
-
-    # def changepassword(self, request, *args, **kwargs):
-    #     # import pdb; pdb.set_trace()
-    #     user = CustomUser.objects.get(id=request.user.id)
-    #     if user.id == request.user.id:
-    #         serializer = ChangePWSerializer(user, data=request.data, request=request.user)
-    #         if serializer.is_valid():
-    #             serializer.save()
-    #             return Response(serializer.data, status=status.HTTP_200_OK)
-    #         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED) 
-        
-
-
-# def delete_user(self, request, id, format=None):
-#     user = CustomUser.objects.get(id=id)
-#     user.delete()
-#     return Response(status=status.HTTP_204_NO_CONTENT)

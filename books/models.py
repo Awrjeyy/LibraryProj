@@ -49,12 +49,12 @@ class Book(models.Model):
     def save(self, *args, **kwargs):
         super().save()
 
-        bk_cover = Image.open(self.book_cover.path)
+        book_cover = Image.open(self.book_cover.path)
 
-        if bk_cover.height > 100 or bk_cover.width > 100:
+        if book_cover.height > 100 or book_cover.width > 100:
             new_img = (300, 300)
-            bk_cover.thumbnail(new_img)
-            bk_cover.save(self.book_cover.path)
+            book_cover.thumbnail(new_img)
+            book_cover.save(self.book_cover.path)
 
 class BorrowBook(models.Model):
 

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var base_url = window.location.origin
     $('#loginform').submit(function (event){
-        console.log('Pizza')
+        console.log('Initializing Login')
         event.preventDefault();
         $.ajax({
             type:'POST',
@@ -20,7 +20,7 @@ $(document).ready(function () {
                 console.log(a);
             },
             error: function(){
-                console.log('Error: Something Wrong');
+                console.log('Username or Password is incorrect');
             }
         });
     });

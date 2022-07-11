@@ -26,13 +26,15 @@ function searchfilterfunc(){
         
         
         console.log(newurl)
-        searchfilter = $("#searchfilter").val();
-        q = $("#searchingbar").val();
+        
+        
         
         
         
     })
     $('#submitsearch').click(function(event){
+        q = $("#searchingbar").val();
+        searchfilter = $("#searchfilter").val();
         newurl = base_url + '/users/search/?q=' + q +"&searchfilter=" + searchfilter
         
         $.ajax({
@@ -40,6 +42,7 @@ function searchfilterfunc(){
             url: base_url + '/users/api/search/?q=' + q +"&searchfilter=" + searchfilter,
             beforeSend: function(){
                 console.log('Before Send');
+                console.log(q);
             },
             success: function(searchlist){
                 

@@ -7,8 +7,10 @@ $(document).ready(function () {
         createBookData.append('title', $('#title').val());
         createBookData.append('authorName', $('#authorName').val());
         createBookData.append('authorEmail', $('#authorEmail').val());
+        createBookData.append('book_description', $('#bookdesc').val());
         createBookData.append('book_condition', $('#bookcondition').val());
         createBookData.append('book_location', $('#booklocation').val());
+        
         $.ajax({
             type:'POST',
             beforeSend: function(xhr, settings){
@@ -19,7 +21,7 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function(response){
-                console.log("BookLog has been Created");
+                console.log("Book Log has been Created");
                 console.log(response);
             },
             error: function(){

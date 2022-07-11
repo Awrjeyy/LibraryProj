@@ -1,3 +1,6 @@
+var base_url = window.location.origin
+var urlid = window.location.pathname
+var userid = urlid.toString().split('/')[3]
 function displayFormUserDetail(userid) {
     let template = "";
     var logintimedata = userid.last_login.toString().split('-').join(',').split('T').join('|').split('.')
@@ -23,9 +26,7 @@ function displayFormUserDetail(userid) {
 
 
 $(document).ready(function () {
-    var base_url = window.location.origin
-    var urlid = window.location.pathname
-    var userid = urlid.toString().split('/')[3]
+    
     $.ajax({
         method: 'GET',
         url: base_url + '/users/api/detail/' + userid + '/',

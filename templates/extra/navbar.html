@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a id="idkanymore"class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li id="for-books-home"class="nav-item">
           <a class='nav-link' href='/books/'>Books</a>
@@ -35,7 +35,8 @@
           {% if user.is_authenticated %}
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/books/create/">Create Book</a>
-              <a class="dropdown-item" href="{% url 'users:users-detail' user.id %}">Update Profile</a>
+              <a class="dropdown-item" href="{% url 'users:users-detail' user.id %}">View Profile</a>
+              <a class="dropdown-item" href="{% url 'users:users-change-password' user.id %}">Change Password</a>
               <a id="logoutbutton" class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
           </div>
          
@@ -55,5 +56,6 @@
 {% endblock %}
 {% block extra_script %}
 <script type="text/javascript" src="{% static 'js/extra/library-extra-search.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/extra/library-extra-href-home.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/users/library-user-logout.js' %}"></script>
 {% endblock %}

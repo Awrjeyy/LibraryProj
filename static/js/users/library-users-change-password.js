@@ -1,8 +1,9 @@
+var base_url = window.location.origin
+var urlid = window.location.pathname
+var userid = urlid.toString().split('/')[3]
 $(document).ready(function () {
-    var base_url = window.location.origin
-    var urlid = window.location.pathname
-    var userid = urlid.toString().split('/')[3]
-    $('#passwordchange').submit(function (event){
+    
+    $('#changepass').click(function (event){
         event.preventDefault();
         console.log('updating password');
         updatePWData = new FormData();

@@ -20,13 +20,21 @@ class BookViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post_books(self, request, *args, **kwargs):
-
-        serializer = BookSerializer(data=request.data)
+        # import pdb; pdb.set_trace()
+        book = Book.objects.get(owner_id = request.user.id)
+        if book.owner_id == request.user.id:
+            serializer = BookSerializer(book, data=request.data, partial=True)
         
-        if serializer.is_valid():
-            serializer.save(owner_id = request.user.id)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get_user_books_detail(self, request, id, format=None):
+        # import pdb;pdb.set_trace()
+        books = Book.objects.filter(owner_id=id)
+        serializer = BookSerializer(books, many=True)
+        return Response(serializer.data)
 
     def get_books_detail(self, request, id, format=None):
         # import pdb;pdb.set_trace()

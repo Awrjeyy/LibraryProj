@@ -4,7 +4,7 @@
 {% block content %}
 <div class='container'>
       <div id="users-detail" class="d-flex justify-content-center align-middle">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 30rem;">
                   <div id="userpic" class="rounded-circle account-img">
                   </div>
                   <div class="card-body">
@@ -21,8 +21,16 @@
                   </div>
             </div>
       </div>
+      <div class='users-books'>
+            <h1 class="d-flex justify-content-center align-middle">Thou Owner's Books</h1>
+               <div class="col" id="users-books-views" >
+                  
+               </div>
+               
+         </div>
 </div>
 {% endblock %}
 {% block extra_script %}
 <script type="text/javascript" src="{% static 'js/users/library-users-detail.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/users/library-user-books.js' %}"></script>
 {% endblock %}

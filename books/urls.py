@@ -6,6 +6,7 @@ app_name = 'books'
 urlpatterns = [
     path('api/data/', api.BookViewSet.as_view({'get': 'get_books'})),
     path('api/detail/<int:id>', api.BookViewSet.as_view({'get': 'get_books_detail'})),
+    path('api/users-books/<int:id>', api.BookViewSet.as_view({'get': 'get_user_books_detail'})),
     path('api/update/<int:id>', api.BookViewSet.as_view({'post': 'put_books_detail'})),
     path('api/delete/<int:id>', api.BookViewSet.as_view({'delete': 'delete_book_detail'})),
     path('api/like/<int:id>', api.BookViewSet.as_view({'post': 'post_likes'})),

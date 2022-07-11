@@ -3,12 +3,12 @@ from pkg_resources import require
 from rest_framework import serializers
 
 from books.models import Book
-from .models import CustomUser
+from .models import CustomUser, User
 from django.utils.translation import gettext as _
 from django.core.validators import RegexValidator
 from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
-from books.serializers import BookSerializer
+
 
 
 
@@ -91,17 +91,18 @@ class ChangePWSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         user = self.request.user
-
+        
         if attrs['password1'] != attrs['password2']:
             raise serializers.ValidationError({'password2': _("The new passwords do not match.")})
         
         else:
+            
             password = attrs['password1']
             user.set_password(password)
             user.save()
 
-        validate_password(attrs(['password1']), self.request.user)
-
+        validate_password(attrs['password1'], self.request.user)
+        
         return attrs
 
 class UpdateUserSerializer(serializers.ModelSerializer):
@@ -139,22 +140,3 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
         return instance
 
-class ResetPasswordSerializer(serializers.ModelSerializer):
-    email=serializers.CharField(max_length=100)
-    password=serializers.CharField(max_length=100)
-    class Meta:
-        model = CustomUser
-        fields='__all__'
-    def save(self):
-        email=self.validated_data['email']
-        password=self.validated_data['password']
-        #filtering out whethere username is existing or not, if your username is existing then if condition will allow your username
-        if CustomUser.objects.filter(email=email).exists():
-            #if your username is existing get the query of your specific username 
-            user = CustomUser.objects.get(email=email)
-            #then set the new password for your username
-            user.set_password(password)
-            user.save()
-            return user
-        else:
-            raise serializers.ValidationError({'error':'please enter valid crendentials'})

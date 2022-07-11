@@ -1,12 +1,8 @@
 var base_url = window.location.origin
+var base_url = window.location.origin
+var urlid = window.location.pathname
+var bookid = urlid.toString().split('/')[3]
 function displayBookFormDetail(bookid) {
-    let template = "";
-    var Date = bookid.added.toString().split('-').join(',').split('T').join(',').split('.')
-    var temp = Date[0].split(',')
-    var ymd = temp[0]+'-'+temp[1]+'-'+temp[2]
-    var time = temp[3]
-    
-        
     
     var booktitle = bookid.title
     var bookauthor = bookid.authorName 
@@ -28,18 +24,17 @@ function displayBookFormDetail(bookid) {
 }
 
 $(document).ready(function () {
-    var base_url = window.location.origin
-    var urlid = window.location.pathname
-    var bookid = urlid.toString().split('/')[3]
+    
+    console.log(bookid)
     $.ajax({
         method: 'GET',
         url: base_url + '/books/api/detail/' + bookid,
         beforeSend: function(){
-            console.log('Before Send');
+            console.log('Book Update is being initialized');
         },
         success: function(bookid){
             displayBookFormDetail(bookid);
-            console.log(bookid);
+            console.log("Book Updated Successfully: " + bookid);
         },
         error: function(){
             console.log('Error: Something Wrong');
@@ -52,18 +47,22 @@ $('#updatebooksdetails').submit(function (event){
     event.preventDefault();
     console.log('updating book');
     updateBookData = new FormData();
-    if(updateBookData.append('user_img', $('#updtbkcover')[0].files[0] != null)){
-        updateBookData.append('user_img', $('#updtbkcover')[0].files[0]);
+    if(($('#updtbkcover')[0].files[0] != null)){
+        updateBookData.append('book_cover', $('#updtbkcover')[0].files[0])
+        
     }
     else {
-        updateBookData.append('user_img', '');
+        updateBookData.append('book_cover', '');
+        
     }
+    
     updateBookData.append('title', $('#updttitle').val());
     updateBookData.append('authorName', $('#updtauthor').val());
     updateBookData.append('autherEmail', $('#updtaemail').val());
     updateBookData.append('book_description', $('#updtbkdesc').val());
     updateBookData.append('book_condition', $('#updtbkcondition').val());
     updateBookData.append('book_location', $('#updtbklocation').val());
+    
     $.ajax({
         type:'POST',
         beforeSend: function(xhr, settings){
@@ -76,6 +75,7 @@ $('#updatebooksdetails').submit(function (event){
         success: function(response){
             console.log("User has been Updated");
             console.log(response);
+            console.log(bookid)
         },
         error: function(){
             console.log('Error: Something Wrong');
