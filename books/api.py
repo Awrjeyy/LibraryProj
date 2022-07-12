@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
 from users import serializers
 from .models import Book, BookComments, BorrowBook
-from .serializers import BookSerializer, BorrowedBookSerializer, BookCommentSerializer
+from .serializers import BookSerializer, BorrowedBookSerializer, BookCommentSerializer, CreateBookSerialzier
 
 class BookViewSet(viewsets.ViewSet):
     parser_classes = (MultiPartParser, FormParser)
@@ -20,22 +20,28 @@ class BookViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post_books(self, request, *args, **kwargs):
-
-        serializer = BookSerializer(data=request.data)
-        
+        # import pdb; pdb.set_trace()
+        serializer = BookSerializer(data=request.data, partial=True)
+    
         if serializer.is_valid():
-            serializer.save(owner_id = request.user.id)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def get_user_books_detail(self, request, id, format=None):
+        
+        books = Book.objects.filter(owner_id=id)
+        serializer = BookSerializer(books, many=True)
+        return Response(serializer.data)
+
     def get_books_detail(self, request, id, format=None):
-        # import pdb;pdb.set_trace()
+        
         books = Book.objects.get(id=id)
         serializer1 = BookSerializer(books)
         return Response(serializer1.data)
 
     def put_books_detail(self, request, id, format=None):
-        # import pdb; pdb.set_trace()
+        
 
         books = Book.objects.get(id=id)
         if books.owner_id == request.user.id:
@@ -55,7 +61,7 @@ class BookViewSet(viewsets.ViewSet):
         return
 
     def post_likes(self, request, id, format=None):
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         books = Book.objects.get(id=id)
         if books.likes.filter(id=request.user.id) != None:
             books.likes.add(request.user)
@@ -63,6 +69,7 @@ class BookViewSet(viewsets.ViewSet):
         return Response(status==status.HTTP_400_BAD_REQUEST)
     
     def remove_likes(self, request, id, format=None):
+        # import pdb; pdb.set_trace()
         books = Book.objects.get(id=id)
         if books.likes.filter(id=request.user.id).exists():
             books.likes.remove(request.user)
@@ -72,14 +79,14 @@ class BookViewSet(viewsets.ViewSet):
 class BookAvailViewSet(viewsets.ViewSet):
 
     def get_borrowed_book(self, request, id, format=None):
-        # import pdb; pdb.set_trace()
+        
         books = BorrowBook.objects.filter(book_id=id).first()
         serializer = BorrowedBookSerializer(books)
             
         return Response(serializer.data)
 
     def borrow_book(self, request, id, format=None):
-        # import pdb; pdb.set_trace()
+        
         books = Book.objects.get(id=id)
         serializer = BorrowedBookSerializer(data=request.data, partial=True)
         if serializer.is_valid():
@@ -98,13 +105,13 @@ class BookAvailViewSet(viewsets.ViewSet):
 class BookCommentViewSet(viewsets.ViewSet):
 
     def get_comments(self, request, id, format=None):
-        # import pdb; pdb.set_trace()
+        
         comments = BookComments.objects.filter(book_id=id)
         serializer = BookCommentSerializer(comments, many=True)
         return Response(serializer.data)
 
     def post_comments(self, request, *args, **kwargs):
-        # import pdb; pdb.set_trace()
+        
         serializer = BookCommentSerializer(data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()

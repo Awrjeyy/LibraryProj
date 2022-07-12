@@ -26,6 +26,7 @@ $(document).ready(function () {
     var base_url = window.location.origin
     var urlid = window.location.pathname
     var userid = urlid.toString().split('/')[3]
+    console.log(userid);
     $.ajax({
         method: 'GET',
         url: base_url + '/users/api/detail/' + userid + '/',
@@ -47,6 +48,9 @@ $(document).ready(function () {
 $('#updateuserdetails').submit(function (event){
     event.preventDefault();
     console.log('updating user');
+    var base_url = window.location.origin
+    var urlid = window.location.pathname
+    var userid = urlid.toString().split('/')[3]
     updateData = new FormData();
     updateData.append('user_img', $('#updtusrimg')[0].files[0])
     updateData.append('first_name', $('#updtfname').val());

@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" id="idkanymore" href="#">Home</a>
         </li>
         <li id="for-books-home"class="nav-item">
           <a class='nav-link' href='/books/'>Books</a>
@@ -54,6 +54,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
 {% endblock %}
 {% block extra_script %}
-<script type="text/javascript" src="{% static 'js/extra/library-extra-search.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/users/library-user-logout.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/extra/library-extra-home.js' %}"></script>
 {% endblock %}

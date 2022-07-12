@@ -6,7 +6,7 @@ var searchlist = ""
 let newurl = ""
 $(document).ready(function(){
     newurl = base_url + '/users/search/' + searchlist
-    
+    searchfilter = $("#searchfilter").val();
     console.log(searchfilter);
     
     searchfilterfunc();
@@ -26,15 +26,15 @@ function searchfilterfunc(){
         
         
         console.log(newurl)
-        searchfilter = $("#searchfilter").val();
-        q = $("#searchingbar").val();
+        
         
         
         
     })
     $('#submitsearch').click(function(event){
         newurl = base_url + '/users/search/?q=' + q +"&searchfilter=" + searchfilter
-        
+        searchfilter = $("#searchfilter").val();
+        q = $("#searchingbar").val();
         $.ajax({
             method: 'GET',
             url: base_url + '/users/api/search/?q=' + q +"&searchfilter=" + searchfilter,

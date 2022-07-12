@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var base_url = window.location.origin
-    $('#loginform').submit(function (event){
+    $('#loginbtn').click(function (event){
         console.log('Pizza')
         event.preventDefault();
         $.ajax({
@@ -15,6 +15,7 @@ $(document).ready(function () {
                 
             },
             success: function(response){
+                
                 console.log("User has Logged In and redirected");
                 a = window.location.replace(base_url + '/users/')
                 console.log(a);

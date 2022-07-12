@@ -135,7 +135,7 @@ class UpdateUserViewset(viewsets.ViewSet):
         return obj
 
     def updateuser(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         user = self.request.user
         serializer = UpdateUserSerializer(user, data = self.request.data, request=self.request, partial=True)
 

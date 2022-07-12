@@ -1,24 +1,27 @@
 $(document).ready(function () {
     var base_url = window.location.origin
-    $('#loginform').submit(function (event){
+    $('#resgisterbtn').click(function (event){
         event.preventDefault();
         $.ajax({
             type:'POST',
             beforeSend: function(xhr, settings){
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.setRequestHeader("X-CSRFToken", createcsrftoken);
             },
             url: base_url + '/users/api/create/',
             data: {
                 'email': $('#email').val(),
                 'password': $('#password1').val(),
+                'first_name': $('#first_name').val(),
+                'last_name': $('#last_name').val(),
+                'password2': $('#password2').val(),
                 
             },
             success: function(response){
                 console.log("User has been Created");
                 console.log(response);
             },
-            error: function(){
-                console.log('Error: Something Wrong');
+            error: function(error){
+                console.log('Error: Something Wrong: ' + error);
             }
         });
     });
@@ -39,5 +42,5 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-const csrftoken = getCookie('csrftoken');
+const createcsrftoken = getCookie('csrftoken');
 

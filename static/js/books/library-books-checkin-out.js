@@ -11,12 +11,12 @@ function CheckIfAvail(bookid){
     let returnbook = "<p><a id='returnbook' href='" +  "' class='btn btn-danger btn-sm' >Return</a></p>"
     let availabletext = ""
     let bookcon = $("#bookcondition").text()
-    console.log(bookid.book)
-    console.log(bookcon=="Digital")
-    console.log(bookid.book_available)
-    console.log(bookid.book_return)
-    console.log(bookid.book == null)
-    console.log(bookid.borrow == userid)
+    // console.log(bookid.book)
+    // console.log(bookcon=="Digital")
+    // console.log(bookid.book_available)
+    // console.log(bookid.book_return)
+    // console.log(bookid.book == null)
+    // console.log(bookid.borrow == userid)
     if(bookcon == "Digital"){
         $('#checkin').append(downloadbtn)
     }

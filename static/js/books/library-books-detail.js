@@ -14,27 +14,29 @@ function displayBookDetail(bookid) {
     console.log("Function side: " + id)
     console.log("Amount of likes in book: " + bookid.likes)
     
-    console.log()
-    userExistbool = false
-    console.log(bookid.likes.length)
-    console.log(bookid.likes.id)
-    console.log(bookid.likes.length==0)
-    userExist = bookid.likes.filter(function(){
-        a = bookid.likes
-        b = bookid.likes.length
-        for(var i = 0; i < b; i++){
-            if(a[i] !== userid){
-                userExistbool = false;
-                
-            }
-            else{
-                userExistbool = true;
-            }
+    // console.log()
+    // userExistbool = false
+    // console.log(bookid.likes.length)
+    // console.log(bookid.likes.id)
+    // console.log(bookid.likes.length==0)
+    // userExist = bookid.likes.filter(function(){
+    //     a = bookid.likes
+    //     b = bookid.likes.length
+    //     for(var i = 0; i < b; i++){
+        
+    //         if(a[i] !== userid){
+    //             userExistbool = true;
+    //             console.log(a[i])
+    //         }
+    //         else{
+    //             userExistbool = false;
+    //         }
             
-        }
-    })
-    console.log(bookid.likes)
-    console.log(userExistbool)
+            
+    //     }
+        
+    // })
+
 
     let bookcover = "<div class='media'><img src=" + bookid.book_cover + " class='card-img-top'></div>"
     let booktitle = "<label> Title :</label> <span id='title-"+ bookid.id + "'>" + bookid.title + "</span>"
@@ -45,9 +47,7 @@ function displayBookDetail(bookid) {
     let bookcon = "<label> Condition : </label> <span id='bookcondition'>" + bookid.book_condition + "</span>"
     let bookloc = "<label> Location : </label> <span id='location-"+ bookid.id + "'>" + bookid.book_location + "</span>"
     let bookupdate = "<p><a id='"+ bookid.id + "' href='" + base_url + "/books/update/"+ bookid.id + "' class='btn btn-primary btn-sm'>Update</a></p>"
-    let likecount = bookid.likes.length
-    let like = "<p><a id='like' href='" +  "' class='btn btn-primary btn-sm' >Like</a><b> -"+ likecount +"</b></p>"
-    let dislike = "<p><a id='dislike' href='" +  "' class='btn btn-danger btn-sm ' >Dislike</a><b> -"+likecount+"</b></p>"
+  
 
 
     $('#bookcover').append(bookcover)
@@ -61,14 +61,11 @@ function displayBookDetail(bookid) {
     if(bookid.owner == id){
         $('#bookupdate').append(bookupdate)
     }
-    if(userExistbool == true){
-        $('#dislike').append(dislike)
-    }else{
-        $('#like').append(like)
-    }
+    
 
     
 }
+
 
 
 $(document).ready(function(){

@@ -50,14 +50,14 @@ $(document).ready(function () {
 
 $('#updatebooksdetails').submit(function (event){
     event.preventDefault();
+    var urlid = window.location.pathname
+    var bookid = urlid.toString().split('/')[3]
     console.log('updating book');
     updateBookData = new FormData();
-    if(updateBookData.append('user_img', $('#updtbkcover')[0].files[0] != null)){
-        updateBookData.append('user_img', $('#updtbkcover')[0].files[0]);
+    if(($('#updtbkcover')[0].files[0] != null)){
+        updateBookData.append('book_cover', $('#updtbkcover')[0].files[0]);
     }
-    else {
-        updateBookData.append('user_img', '');
-    }
+    
     updateBookData.append('title', $('#updttitle').val());
     updateBookData.append('authorName', $('#updtauthor').val());
     updateBookData.append('autherEmail', $('#updtaemail').val());
